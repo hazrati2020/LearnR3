@@ -1,6 +1,8 @@
 Hossein
 Metabolomics
 
+Add my name to R
+
 
 32
 single
@@ -38,3 +40,17 @@ For more information on this folder and file workflow and setup, check
 out the [prodigenr](https://rostools.github.io/prodigenr) online
 documentation.
 
+usethis::gh_token_help()
+usethis::create_github_token()
+
+gitcreds::gitcreds_set()
+usethis::git_sitrep()
+
+usethis::use_github()
+1
+
+gitcreds::gitcreds_set()
+2
+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
+
+3
