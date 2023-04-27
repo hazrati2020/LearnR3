@@ -1,0 +1,109 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+#visualization
+
+```{r}
+#create hiostogram
+ggplot(NHANES_small, aes(x=BMI))+
+    geom_histogram()
+```
+
+You can add options to executable code like this
+
+```{r}
+#create histogram
+ggplot(NHANES_small, aes(x
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+``` {=bmi))+}
+    geom_histogram (na.rm = TRUE)
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+NHANES_small %>% 
+    filter(BMI<=60) %>% 
+    ggplot(aes(x=BMI))+
+    geom_bar(na.rm = TRUE)
+```
+
+```{r}
+#| fig-cap:"distribution of BMI."
+#| label:fig-BMI-Histo
+NHANES_small %>% 
+    filter(BMI<=60) %>% 
+    ggplot(aes(x=BMI))+
+    geom_histogram(na.rm = TRUE)
+```
+
+```{r}
+#create count barplot for education
+
+ggplot(NHANES_small, aes(x=Education))+
+    geom_histogram()
+
+```
+
+```{r}
+#create count barplot for diabet
+
+ggplot(NHANES_small, aes(x=Diabetes))+
+    geom_bar()
+```
+
+```{r}
+
+#| label: fig-diabetes-education
+#| fig-cap: "Counts of Diabetes and Education."
+#| fig-subcap:
+#|   - "Number of those with or without Diabetes."
+#|   - "Number of those with different educational status."
+#| layout-ncol: 2
+NHANES_small %>%
+  filter(!is.na(Diabetes)) %>%
+  ggplot(aes(x = Diabetes)) +
+  geom_bar()
+
+NHANES_small %>%
+  filter(!is.na(Education)) %>%
+  ggplot(aes(x = Education)) +
+  geom_bar()
+```
+
+\`\`\`
+```{r}
+
+```
