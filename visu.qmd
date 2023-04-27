@@ -141,8 +141,23 @@ NHANES_small %>%
   geom_violin(na.rm = TRUE)
 
 ```
+##plotting three or more variables
+```{r}
+#plot systolic boold pressure in relation to education and diabetes
 
+NHANES_small %>% 
+    filter(!is.na(Diabetes), !is.na(Education)) %>% 
+    ggplot(aes(x = Education, y = Age, colour = Diabetes)) +
+  geom_boxplot(na.rm = TRUE)
+```
+#plotting bmi in relation to blood presure and age
 
+```{r}
+# Plot BMI in relation to systolic blood pressure and age
+nhanes_exercise %>%
+  ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+  geom_point(na.rm = TRUE)
+```
 
 
 ```{r}
@@ -150,14 +165,61 @@ library(styler)
 ```
 
 
+```{r}
+library(NHANES)
+nhanes_exercise <- NHANES %>%
+  rename_with(snakecase::to_snake_case) %>%
+  rename(sex = gender)
+
+```
 
 
+```{r}
+#| eval: false
+# These are approximate caption titles
+#| label: fig-distribution-ages
+#| fig-cap: "Distribution of different age variables"
+#| layout-ncol: 2
+#| fig-subcap:
+#|   - "Age at collection"
+#|   - "Age of diabetes diagnosis"
+# Distribution of age
+ggplot(nhanes_exercise, aes(x = age)) +
+  geom_density(na.rm = TRUE)
+
+# Distribution of age at diabetes diagnosis
+ggplot(nhanes_exercise, aes(x = diabetes_age)) +
+  geom_density(na.rm = TRUE)
+```
+```
+```{r}
+# BMI in relation to mean arterial pressure
+nhanes_exercise %>%
+  mutate(mean_arterial_pressure = (bp_sys_ave + (2 * bp_dia_ave)) / 3) %>%
+  ggplot(aes(x = bmi, y = mean_arterial_pressure)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth()
+```
 ```{r}
 
 ```
 
 ```{r}
-NHANES_small %>% 
-    filter(!is.na(Education))
+# BMI in relation to mean arterial pressure
+nhanes_exercise %>%
+  mutate(mean_arterial_pressure = (bp_sys_ave + (2 * bp_dia_ave)) / 3) %>%
+  ggplot(aes(x = bmi, y = mean_arterial_pressure)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth()
+```
 
+
+
+
+```{r}
+nhanes_exercise %>%
+  mutate(mean_arterial_pressure = (bp_sys_ave + (2 * bp_dia_ave)) / 3) %>%
+  ggplot(aes()(x = bmi, y = mean_arterial_pressure)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth
 ``
