@@ -103,7 +103,61 @@ NHANES_small %>%
   geom_bar()
 ```
 
-\`\`\`
+\`\`\` 
+
+ploting two variable
+```{r}
+ggplot(NHANES_small, aes(x=BMI, y=Age))+
+    geom_hex(na.rm = TRUE)
+```
+
+## add smoting
+
+```{r}
+ggplot(NHANES_small, aes(x=BMI, y=Age))+
+    geom_hex(na.rm = TRUE)+
+    geom_smooth(na.rm = TRUE)
+```
+```{r}
+#dadged bar plot
+
+NHANES_small %>% 
+      filter(!is.na(Education), !is.na(Diabetes)) %>%
+  ggplot(aes(x = Diabetes, fill = Education)) +
+  geom_bar(position = position_dodge())
+
+```
+
+## two cathegorical variables
+
+
+
+```{r}
+#using mixed data
+# Using mixed data
+NHANES_small %>%
+  filter(!is.na(Diabetes), BMI <= 60) %>%
+  ggplot(aes(x = Diabetes, y = BMI)) +
+  geom_violin(na.rm = TRUE)
+
+```
+
+
+
+
+```{r}
+library(styler)
+```
+
+
+
+
 ```{r}
 
 ```
+
+```{r}
+NHANES_small %>% 
+    filter(!is.na(Education))
+
+``
