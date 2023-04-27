@@ -1,0 +1,55 @@
+---
+title: "reproducible kdoc"
+author: "Hossein Koskon"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+library(tidyverse)
+library(NHANES)
+NHANES_small<- read_csv(here::here("data/nhanes_smaall.csv"))
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+NHANES_small
+
+NHANES_small %>%
+  filter(!is.na(Diabetes)) %>%
+  group_by(Diabetes, Education) %>%
+  summarise(
+    mean_age = mean(Age, na.rm = TRUE),
+    mean_bmi = mean(BMI, na.rm = TRUE)
+  ) %>%
+  ungroup() %>%
+  # 2. Round the means to 1 digit and
+  # modify the `education` column so that male and female get capitalized.
+  mutate(
+    mean_age = round(mean_age, 1),
+    mean_bmi = round(mean_bmi, 1),
+    education = str_to_sentence(Education)
+  ) %>%
+  # 3. Rename `diabetes` to `"Diabetes Status"` and `education` to `Education`
+  rename(
+    "Diabetes Status" = Diabetes, 
+    "Education" = Education,
+    "Mean Age" = mean_age, 
+    "Mean BMI" = mean_bmi
+  ) %>%
+  knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
+
+```
+
+![ostrich from Africa!](Images/Ost.jpg){#fig-kitten-attack width="50%" height="50%"}
